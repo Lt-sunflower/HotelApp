@@ -41,45 +41,45 @@ public class Main {
 				choice = Integer.parseInt(test);
 			} catch (Exception e)
 			{
-				System.out.println("Cannot parse input to int.");
+				System.out.println("Invalid input");
 				choice = 0;
 			}
 			//choice = scanner.nextInt();
 			
 			String roomName = ""; 
-			Boolean b = true;
+			int count = 0;
 			switch(choice) {
 				case 1: 
 					hotel.checkIn();
 					break;
 				case 2:
 					console.writer().println("Enter Room number: ");
-					b = hotel.showRooms(Constants.ROOMSTATUS_OCCUPIED);
-					if (b) {
+					count = hotel.showRooms(Constants.ROOMSTATUS_OCCUPIED);
+					if (count > 0) {
 						roomName = scanner.next();
 						hotel.checkOut(roomName);
 					}
 					break;
 				case 3:
 					console.writer().println("Enter Room number: ");
-					b = hotel.showRooms(Constants.ROOMSTATUS_VACANT);
-					if (b) {
+					count = hotel.showRooms(Constants.ROOMSTATUS_VACANT);
+					if (count > 0) {
 						roomName = scanner.next();
 						hotel.clean(roomName);
 					}
 					break;
 				case 4:
 					console.writer().println("Enter Room number: ");
-					b = hotel.showRooms(Constants.ROOMSTATUS_VACANT);
-					if (b) {
+					count = hotel.showRooms(Constants.ROOMSTATUS_VACANT);
+					if (count > 0) {
 						roomName = scanner.next();
 						hotel.outOfService(roomName);
 					}
 					break;
 				case 5:
 					console.writer().println("Enter Room number: ");
-					b = hotel.showRooms(Constants.ROOMSTATUS_REPAIR);
-					if (b) {
+					count = hotel.showRooms(Constants.ROOMSTATUS_REPAIR);
+					if (count > 0) {
 						roomName = scanner.next();
 						hotel.repair(roomName);
 					}

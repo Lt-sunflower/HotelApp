@@ -6,10 +6,20 @@ public class Room {
 	int priority;
 	int status;
 	
+	public int getStatus() {
+		return status;
+	}
+
 	public Room(String name, int priority) {
 		this.name = name;
 		this.priority = priority;
 		this.status = Constants.ROOMSTATUS_AVAILABLE;
+	}
+	
+	public Room(String name, int priority, int status) {
+		this.name = name;
+		this.priority = priority;
+		this.status = status;
 	}
 
 	public String checkIn() {

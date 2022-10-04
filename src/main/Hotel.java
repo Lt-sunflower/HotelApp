@@ -26,7 +26,7 @@ public class Hotel {
 		
 	}
 
-	public Boolean checkIn() {
+	public String checkIn() {
 
 		for (int i=0; i<rooms.length; i++)
 		{
@@ -36,14 +36,14 @@ public class Hotel {
 				if (s.equals(null));
 				else {
 					System.out.println("Room "+s);
-					return true;
+					return rooms[i].name;
 				}
 					
 			}
 		}
 		
 		System.out.println("No Rooms Available.");
-		return false;
+		return null;
 	}
 
 	public Boolean checkOut(String roomName) {
@@ -68,7 +68,9 @@ public class Hotel {
 		
 	}
 
-	public Boolean showRooms(int status) {
+	public int showRooms(int status) {
+		
+		int count = 0;
 		StringBuilder sb = new StringBuilder();
 		
 		for (int i=0; i<rooms.length; i++)
@@ -76,6 +78,7 @@ public class Hotel {
 			if (rooms[i].status == status)
 			{
 				sb.append(rooms[i].name+", ");
+				count++;
 					
 			}
 		}
@@ -85,11 +88,14 @@ public class Hotel {
 			System.out.println(s);
 		} else 
 		{
-			System.out.println("No rooms to choose from.");
-			return false;
+			if (status == Constants.ROOMSTATUS_AVAILABLE)
+				System.out.println("No available rooms.");
+			else
+				System.out.println("No rooms to choose from.");
+			return 0;
 		}
 
-		return true;
+		return count;
 	}
 
 	public Boolean clean(String roomName) {
