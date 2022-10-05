@@ -2,41 +2,26 @@ package main;
 
 public class Hotel {
 	
-	final int NUMBER_OF_FLOORS = 4;
-	final int NUMBER_OF_ROOMS = 5;
 	
-	private Room[] rooms = new Room[20];
 	
-	public Hotel() {
+	private final Room[] rooms;
+	
+	public Hotel(Room[] rooms) {
 		
-		for (int i=0; i<NUMBER_OF_FLOORS; i++)
-		{
-			for (int j=0; j<NUMBER_OF_ROOMS; j++)
-			{
-				String name = "";
-				if ((i+1)%2==1)
-					name = String.valueOf(i+1) + Character.toString((char)65+j);
-				else 
-					name = String.valueOf(i+1) + Character.toString((char)65+(NUMBER_OF_ROOMS-1)-j);
-				int index = i*NUMBER_OF_ROOMS+j;
-				Room newRoom = new Room(name, index);
-				rooms[index] = newRoom;
-			}
-		}
-		
+		this.rooms = rooms;
 	}
 
 	public String checkIn() {
 
 		for (int i=0; i<rooms.length; i++)
 		{
-			if (rooms[i].status == Constants.ROOMSTATUS_AVAILABLE)
+			if (rooms[i].getStatus() == Constants.ROOMSTATUS_AVAILABLE)
 			{
 				String s = rooms[i].checkIn();
 				if (s.equals(null));
 				else {
 					System.out.println("Room "+s);
-					return rooms[i].name;
+					return rooms[i].getName();
 				}
 					
 			}
@@ -50,12 +35,12 @@ public class Hotel {
 
 		for (int i=0; i<rooms.length; i++)
 		{
-			if (rooms[i].name.equals(roomName))
+			if (rooms[i].getName().equalsIgnoreCase(roomName))
 			{
 				Boolean b = rooms[i].checkOut();
 				if (b!= true);
 				else {
-					System.out.println(rooms[i].name+ " checked out.");
+					System.out.println(rooms[i].getName()+ " checked out.");
 					return true;
 				}
 					
@@ -75,9 +60,9 @@ public class Hotel {
 		
 		for (int i=0; i<rooms.length; i++)
 		{
-			if (rooms[i].status == status)
+			if (rooms[i].getStatus() == status)
 			{
-				sb.append(rooms[i].name+", ");
+				sb.append(rooms[i].getName()+", ");
 				count++;
 					
 			}
@@ -102,12 +87,12 @@ public class Hotel {
 		
 		for (int i=0; i<rooms.length; i++)
 		{
-			if (rooms[i].name.equals(roomName))
+			if (rooms[i].getName().equalsIgnoreCase(roomName))
 			{
 				Boolean b = rooms[i].clean();
 				if (b!= true);
 				else {
-					System.out.println(rooms[i].name+ " cleaned.");
+					System.out.println(rooms[i].getName()+ " cleaned.");
 					return true;
 				}
 					
@@ -123,12 +108,12 @@ public class Hotel {
 		
 		for (int i=0; i<rooms.length; i++)
 		{
-			if (rooms[i].name.equals(roomName))
+			if (rooms[i].getName().equalsIgnoreCase(roomName))
 			{
 				Boolean b = rooms[i].repair();
 				if (b!= true);
 				else {
-					System.out.println(rooms[i].name+ " repaired.");
+					System.out.println(rooms[i].getName()+ " repaired.");
 					return true;
 				}
 					
@@ -144,12 +129,12 @@ public class Hotel {
 		
 		for (int i=0; i<rooms.length; i++)
 		{
-			if (rooms[i].name.equals(roomName))
+			if (rooms[i].getName().equalsIgnoreCase(roomName))
 			{
 				Boolean b = rooms[i].oos();
 				if (b!= true);
 				else {
-					System.out.println(rooms[i].name+ " out of service.");
+					System.out.println(rooms[i].getName()+ " out of service.");
 					return true;
 				}
 					

@@ -2,14 +2,44 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import main.Constants;
 import main.Hotel;
+import main.Room;
 
 class HotelTest {
 
-	Hotel hotel = new Hotel();
+	Hotel hotel;
+	
+	@BeforeEach
+	void setUpBeforeEach() throws Exception {
+		
+		Room[] rooms = new Room[20];
+		
+		for (int i=0; i<4; i++)
+		{
+			for (int j=0; j<5; j++)
+			{
+				String name = "";
+				if ((i+1)%2==1)
+					name = String.valueOf(i+1) + Character.toString((char)65+j);
+				else 
+					name = String.valueOf(i+1) + Character.toString((char)65+(5-1)-j);
+				int index = i*5+j;
+				Room newRoom = new Room(name, index);
+				rooms[index] = newRoom;
+			}
+		}
+
+		
+		hotel = new Hotel(rooms);
+	}
+
 	
 	@Test
 	void testCheckInSuccess() {
@@ -37,7 +67,7 @@ class HotelTest {
 	@Test
 	void testCheckOutFailure() {
 		hotel.checkIn();
-		Boolean b = hotel.checkOut("1B");
+		Boolean b = hotel.checkOut("wrong");
 		assertFalse(b);
 	}
 
@@ -53,7 +83,7 @@ class HotelTest {
 	void testCleanFailure() {
 		hotel.checkIn();
 		hotel.checkOut("1A");
-		Boolean b = hotel.clean("1B");
+		Boolean b = hotel.clean("wrong");
 		assertFalse(b);
 	}
 	

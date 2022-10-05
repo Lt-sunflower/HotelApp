@@ -5,9 +5,34 @@ import java.util.Scanner;
 
 public class Main {
 
+	final static int NUMBER_OF_FLOORS = 4;
+	final static int NUMBER_OF_ROOMS = 5;
+	
+	static Room[] rooms = new Room[NUMBER_OF_FLOORS*NUMBER_OF_ROOMS];
+	
 	public static void main(String[] args) {
 
+		init();
 		run();
+	}
+
+	private static void init() {
+
+		for (int i=0; i<NUMBER_OF_FLOORS; i++)
+		{
+			for (int j=0; j<NUMBER_OF_ROOMS; j++)
+			{
+				String name = "";
+				if ((i+1)%2==1)
+					name = String.valueOf(i+1) + Character.toString((char)65+j);
+				else 
+					name = String.valueOf(i+1) + Character.toString((char)65+(NUMBER_OF_ROOMS-1)-j);
+				int index = i*NUMBER_OF_ROOMS+j;
+				Room newRoom = new Room(name, index);
+				rooms[index] = newRoom;
+			}
+		}
+		
 	}
 
 	private static void run() {
@@ -21,7 +46,7 @@ public class Main {
 			return;
 		}
 
-		Hotel hotel = new Hotel();
+		Hotel hotel = new Hotel(rooms);
 		
 		Scanner scanner = new Scanner(console.reader());
 		int choice = 0;

@@ -2,12 +2,20 @@ package main;
 
 public class Room {
 	
-	String name;
-	int priority;
-	int status;
+	private final String name;
+	private final int priority;
+	private int status;
 	
 	public int getStatus() {
 		return status;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getPriority() {
+		return priority;
 	}
 
 	public Room(String name, int priority) {
